@@ -21,7 +21,7 @@
   jeroen@frijters.net
   
 */
-#if MONO
+#if MONO && !NO_SYMBOL_WRITER
 using System;
 using System.Collections.Generic;
 using Mono.CompilerServices.SymbolWriter;
