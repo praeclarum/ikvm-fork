@@ -23,12 +23,104 @@
 */
 using System;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using System.Text;
 using IKVM.Reflection.Emit;
 using IKVM.Reflection.Reader;
 using IKVM.Reflection.Writer;
 using IKVM.Reflection.Metadata;
+
+#if PCL
+using IKVM.Runtime.InteropServices;
+namespace IKVM.Runtime.InteropServices
+{
+	public enum UnmanagedType
+	{
+		Bool = 2,
+		I1,
+		U1,
+		I2,
+		U2,
+		I4,
+		U4,
+		I8,
+		U8,
+		R4,
+		R8,
+		Currency = 15,
+		BStr = 19,
+		LPStr,
+		LPWStr,
+		LPTStr,
+		ByValTStr,
+		IUnknown = 25,
+		IDispatch,
+		Struct,
+		Interface,
+		SafeArray,
+		ByValArray,
+		SysInt,
+		SysUInt,
+		VBByRefStr = 34,
+		AnsiBStr,
+		TBStr,
+		VariantBool,
+		FunctionPtr,
+		AsAny = 40,
+		LPArray = 42,
+		LPStruct,
+		CustomMarshaler,
+		Error
+	}
+	public enum VarEnum
+	{
+		VT_EMPTY,
+		VT_NULL,
+		VT_I2,
+		VT_I4,
+		VT_R4,
+		VT_R8,
+		VT_CY,
+		VT_DATE,
+		VT_BSTR,
+		VT_ERROR = 10,
+		VT_BOOL,
+		VT_VARIANT,
+		VT_UNKNOWN,
+		VT_DECIMAL,
+		VT_I1 = 16,
+		VT_UI1,
+		VT_UI2,
+		VT_UI4,
+		VT_I8,
+		VT_UI8,
+		VT_INT,
+		VT_UINT,
+		VT_VOID,
+		VT_HRESULT,
+		VT_PTR,
+		VT_SAFEARRAY,
+		VT_CARRAY,
+		VT_USERDEFINED,
+		VT_LPSTR,
+		VT_LPWSTR,
+		VT_RECORD = 36,
+		VT_FILETIME = 64,
+		VT_BLOB,
+		VT_STREAM,
+		VT_STORAGE,
+		VT_STREAMED_OBJECT,
+		VT_STORED_OBJECT,
+		VT_BLOB_OBJECT,
+		VT_CF,
+		VT_CLSID,
+		VT_VECTOR = 4096,
+		VT_ARRAY = 8192,
+		VT_BYREF = 16384
+	}
+}
+#else
+using System.Runtime.InteropServices;
+#endif
 
 namespace IKVM.Reflection
 {

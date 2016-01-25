@@ -23,16 +23,21 @@
 */
 using System;
 using System.Collections.Generic;
-using System.Configuration.Assemblies;
 using System.IO;
 using System.Diagnostics;
 using System.Globalization;
 using System.Resources;
-using System.Security.Cryptography;
 using System.Security;
 using IKVM.Reflection.Metadata;
 using IKVM.Reflection.Impl;
 using IKVM.Reflection.Writer;
+
+#if PCL
+using IKVM.Configuration.Assemblies;
+#else
+using System.Configuration.Assemblies;
+using System.Security.Cryptography;
+#endif
 
 namespace IKVM.Reflection.Emit
 {
@@ -82,7 +87,7 @@ namespace IKVM.Reflection.Emit
 			internal string Name;
 			internal string FileName;
 			internal ResourceAttributes Attributes;
-#if !CORECLR
+#if !(CORECLR||PCL)
 			internal ResourceWriter Writer;
 #endif
 		}
@@ -503,7 +508,7 @@ namespace IKVM.Reflection.Emit
 			resourceFiles.Add(resfile);
 		}
 
-#if !CORECLR
+#if !(CORECLR||PCL)
 		public IResourceWriter DefineResource(string name, string description, string fileName)
 		{
 			return DefineResource(name, description, fileName, ResourceAttributes.Public);

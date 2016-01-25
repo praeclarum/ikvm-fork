@@ -30,6 +30,12 @@ using System.Diagnostics;
 using IKVM.Reflection.Reader;
 using IKVM.Reflection.Emit;
 
+#if PCL
+using CallingConvention = IKVM.Runtime.InteropServices.CallingConvention;
+#else
+using CallingConvention = System.Runtime.InteropServices.CallingConvention;
+#endif
+
 namespace IKVM.Reflection
 {
 	public sealed class ResolveEventArgs : EventArgs
@@ -943,7 +949,7 @@ namespace IKVM.Reflection
 			return new AssemblyBuilder(this, name, dir, null);
 		}
 
-#if !CORECLR
+#if !(CORECLR||PCL)
 #if NET_4_0
 		[Obsolete]
 #endif
@@ -1169,7 +1175,7 @@ namespace IKVM.Reflection
 			return FunctionPointerType.Make(this, sig);
 		}
 
-		public __StandAloneMethodSig MakeStandAloneMethodSig(System.Runtime.InteropServices.CallingConvention callingConvention, Type returnType, CustomModifiers returnTypeCustomModifiers, Type[] parameterTypes, CustomModifiers[] parameterTypeCustomModifiers)
+		public __StandAloneMethodSig MakeStandAloneMethodSig(CallingConvention callingConvention, Type returnType, CustomModifiers returnTypeCustomModifiers, Type[] parameterTypes, CustomModifiers[] parameterTypeCustomModifiers)
 		{
 			return new __StandAloneMethodSig(true, callingConvention, 0, returnType ?? this.System_Void, Util.Copy(parameterTypes), Type.EmptyTypes,
 				PackedCustomModifiers.CreateFromExternal(returnTypeCustomModifiers, parameterTypeCustomModifiers, Util.NullSafeLength(parameterTypes)));

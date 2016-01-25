@@ -44,7 +44,7 @@ namespace IKVM.Reflection
 		{
 		}
 
-#if !CORECLR
+#if !(CORECLR||PCL)
 		private BadImageFormatException(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context)
 			: base(info, context)
 		{

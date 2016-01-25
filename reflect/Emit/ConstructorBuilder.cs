@@ -77,7 +77,7 @@ namespace IKVM.Reflection.Emit
 			methodBuilder.__AddDeclarativeSecurity(customBuilder);
 		}
 
-#if !CORECLR
+#if !(CORECLR||PCL)
 		public void AddDeclarativeSecurity(System.Security.Permissions.SecurityAction securityAction, System.Security.PermissionSet permissionSet)
 		{
 			methodBuilder.AddDeclarativeSecurity(securityAction, permissionSet);

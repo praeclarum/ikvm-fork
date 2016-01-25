@@ -26,11 +26,26 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
-using CallingConvention = System.Runtime.InteropServices.CallingConvention;
 using IKVM.Reflection.Reader;
 using IKVM.Reflection.Emit;
 using IKVM.Reflection.Writer;
 using IKVM.Reflection.Metadata;
+
+#if PCL
+namespace IKVM.Runtime.InteropServices
+{
+	public enum CallingConvention
+	{
+		Winapi = 1,
+		Cdecl,
+		StdCall,
+		ThisCall,
+		FastCall
+	}
+}
+#else
+using CallingConvention = System.Runtime.InteropServices.CallingConvention;
+#endif
 
 namespace IKVM.Reflection
 {

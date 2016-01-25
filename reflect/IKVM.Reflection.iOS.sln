@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IKVM.Reflection.iOS", "IKVM.Reflection.iOS.csproj", "{AFAD97A6-D2A0-4335-AA4A-1E73BFD68A90}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IKVM.Reflection.Pcl", "IKVM.Reflection.Pcl.csproj", "{D4E6BA56-D45E-45BA-ADCC-F1C731035795}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AFAD97A6-D2A0-4335-AA4A-1E73BFD68A90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFAD97A6-D2A0-4335-AA4A-1E73BFD68A90}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFAD97A6-D2A0-4335-AA4A-1E73BFD68A90}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFAD97A6-D2A0-4335-AA4A-1E73BFD68A90}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4E6BA56-D45E-45BA-ADCC-F1C731035795}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4E6BA56-D45E-45BA-ADCC-F1C731035795}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4E6BA56-D45E-45BA-ADCC-F1C731035795}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4E6BA56-D45E-45BA-ADCC-F1C731035795}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

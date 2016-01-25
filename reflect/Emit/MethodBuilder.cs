@@ -33,6 +33,12 @@ using System.Diagnostics.SymbolStore;
 using IKVM.Reflection.Metadata;
 using IKVM.Reflection.Writer;
 
+#if PCL
+using CallingConvention = IKVM.Runtime.InteropServices.CallingConvention;
+#else
+using CallingConvention = System.Runtime.InteropServices.CallingConvention;
+#endif
+
 namespace IKVM.Reflection.Emit
 {
 	public sealed class MethodBuilder : MethodInfo
@@ -289,7 +295,7 @@ namespace IKVM.Reflection.Emit
 			declarativeSecurity.Add(customBuilder);
 		}
 
-#if !CORECLR
+#if !(CORECLR||PCL)
 		public void AddDeclarativeSecurity(System.Security.Permissions.SecurityAction securityAction, System.Security.PermissionSet permissionSet)
 		{
 			this.ModuleBuilder.AddDeclarativeSecurity(pseudoToken, securityAction, permissionSet);

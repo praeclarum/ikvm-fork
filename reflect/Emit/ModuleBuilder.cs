@@ -28,13 +28,21 @@ using System.Diagnostics;
 #if !NO_SYMBOL_WRITER
 using System.Diagnostics.SymbolStore;
 #endif
+#if !PCL
 using System.Security.Cryptography;
+#endif
 using System.Resources;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using IKVM.Reflection.Impl;
 using IKVM.Reflection.Metadata;
 using IKVM.Reflection.Writer;
+
+#if PCL
+using CallingConvention = IKVM.Runtime.InteropServices.CallingConvention;
+#else
+using CallingConvention = System.Runtime.InteropServices.CallingConvention;
+#endif
 
 namespace IKVM.Reflection.Emit
 {
@@ -79,13 +87,13 @@ namespace IKVM.Reflection.Emit
 		private struct ResourceWriterRecord
 		{
 			private readonly string name;
-#if !CORECLR
+#if !(CORECLR||PCL)
 			private readonly ResourceWriter rw;
 #endif
 			private readonly Stream stream;
 			private readonly ResourceAttributes attributes;
 
-#if CORECLR
+#if CORECLR||PCL
 			internal ResourceWriterRecord(string name, Stream stream, ResourceAttributes attributes)
 			{
 				this.name = name;
@@ -109,7 +117,7 @@ namespace IKVM.Reflection.Emit
 
 			internal void Emit(ModuleBuilder mb, int offset)
 			{
-#if !CORECLR
+#if !(CORECLR||PCL)
 				if (rw != null)
 				{
 					rw.Generate();
@@ -142,7 +150,7 @@ namespace IKVM.Reflection.Emit
 
 			internal void Close()
 			{
-#if !CORECLR
+#if !(CORECLR||PCL)
 				if (rw != null)
 				{
 					rw.Close();
@@ -516,7 +524,7 @@ namespace IKVM.Reflection.Emit
 			this.DeclSecurity.AddRecord(rec);
 		}
 
-#if !CORECLR
+#if !(CORECLR||PCL)
 		internal void AddDeclarativeSecurity(int token, System.Security.Permissions.SecurityAction securityAction, System.Security.PermissionSet permissionSet)
 		{
 			// like Ref.Emit, we're using the .NET 1.x xml format
@@ -580,7 +588,7 @@ namespace IKVM.Reflection.Emit
 			resourceWriters.Add(new ResourceWriterRecord(name, stream, attribute));
 		}
 
-#if !CORECLR
+#if !(CORECLR||PCL)
 		public IResourceWriter DefineResource(string name, string description)
 		{
 			return DefineResource(name, description, ResourceAttributes.Public);

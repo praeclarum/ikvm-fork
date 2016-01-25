@@ -25,7 +25,9 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+#if !PCL
 using System.Security.Cryptography;
+#endif
 using IKVM.Reflection.Emit;
 using IKVM.Reflection.Impl;
 using IKVM.Reflection.Metadata;
@@ -431,7 +433,7 @@ namespace IKVM.Reflection.Writer
 			bb.WriteTo(stream);
 		}
 
-		internal static void HashChunk(Stream stream, CryptoStream cs, byte[] buf, int length)
+		internal static void HashChunk(Stream stream, Stream cs, byte[] buf, int length)
 		{
 			while (length > 0)
 			{

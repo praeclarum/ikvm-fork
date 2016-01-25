@@ -22,8 +22,13 @@
   
 */
 using System;
-using System.Runtime.InteropServices;
 using IKVM.Reflection.Reader;
+
+#if PCL
+using CallingConvention = IKVM.Runtime.InteropServices.CallingConvention;
+#else
+using CallingConvention = System.Runtime.InteropServices.CallingConvention;
+#endif
 
 namespace IKVM.Reflection
 {

@@ -23,7 +23,10 @@
 */
 using System;
 using System.IO;
+
+#if !PCL
 using System.Security.Cryptography;
+#endif
 
 namespace IKVM.Reflection
 {
@@ -54,12 +57,12 @@ namespace IKVM.Reflection
 			this.keyPairArray = (byte[])keyPairArray.Clone();
 		}
 
-		public StrongNameKeyPair(FileStream keyPairFile)
+		public StrongNameKeyPair(Stream keyPairFile)
 			: this(ReadAllBytes(keyPairFile))
 		{
 		}
 
-		private static byte[] ReadAllBytes(FileStream keyPairFile)
+		private static byte[] ReadAllBytes(Stream keyPairFile)
 		{
 			if (keyPairFile == null)
 			{
@@ -98,6 +101,7 @@ namespace IKVM.Reflection
 			}
 		}
 
+#if !PCL
 		internal RSACryptoServiceProvider CreateRSA()
 		{
 			try
@@ -126,8 +130,8 @@ namespace IKVM.Reflection
 				throw new ArgumentException("Unable to obtain public key for StrongNameKeyPair.");
 			}
 		}
-
-#if !CORECLR
+#endif
+#if !(CORECLR||PCL)
 		[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
 		private byte[] MonoGetPublicKey()
 		{

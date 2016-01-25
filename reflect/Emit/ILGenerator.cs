@@ -22,7 +22,11 @@
   
 */
 using System;
+#if PCL
+using IKVM.Runtime.InteropServices;
+#else
 using System.Runtime.InteropServices;
+#endif
 using System.Collections.Generic;
 #if !NO_SYMBOL_WRITER
 using System.Diagnostics.SymbolStore;

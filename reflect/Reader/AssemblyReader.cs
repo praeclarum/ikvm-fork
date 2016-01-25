@@ -23,9 +23,14 @@
 */
 using System;
 using System.Collections.Generic;
-using System.Configuration.Assemblies;
 using System.IO;
 using IKVM.Reflection.Metadata;
+
+#if PCL
+using IKVM.Configuration.Assemblies;
+#else
+using System.Configuration.Assemblies;
+#endif
 
 namespace IKVM.Reflection.Reader
 {

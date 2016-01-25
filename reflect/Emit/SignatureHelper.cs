@@ -23,9 +23,14 @@
 */
 using System;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using IKVM.Reflection;
 using IKVM.Reflection.Writer;
+
+#if PCL
+using CallingConvention = IKVM.Runtime.InteropServices.CallingConvention;
+#else
+using CallingConvention = System.Runtime.InteropServices.CallingConvention;
+#endif
 
 namespace IKVM.Reflection.Emit
 {

@@ -23,16 +23,26 @@
 */
 using System;
 using System.Globalization;
-using System.Configuration.Assemblies;
 using System.IO;
-using System.Security.Cryptography;
 using System.Text;
 using IKVM.Reflection.Reader;
+
+#if PCL
+using IKVM.Configuration.Assemblies;
+namespace IKVM.Configuration.Assemblies {
+	public class AssemblyHashAlgorithm {}
+	public class AssemblyVersionCompatibility {}
+}
+#else
+using System.Configuration.Assemblies;
+using System.Security.Cryptography;
+#endif
+
 
 namespace IKVM.Reflection
 {
 	public sealed class AssemblyName
-#if !CORECLR
+#if !(CORECLR||PCL)
 		: ICloneable
 #endif
 	{
